@@ -1,7 +1,7 @@
 import GRDB
 
 struct Transaction: Identifiable, Codable, Hashable {
-    var id: String
+    var id: String = UUID().uuidString
     var ticker: String
     var date: String           // "YYYY-MM-DD"
     var operation: String      // "BUY" | "SELL"
