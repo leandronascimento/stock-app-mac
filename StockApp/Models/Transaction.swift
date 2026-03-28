@@ -1,3 +1,4 @@
+import Foundation
 import GRDB
 
 struct Transaction: Identifiable, Codable, Hashable {
