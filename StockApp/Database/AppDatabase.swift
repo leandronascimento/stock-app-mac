@@ -30,6 +30,9 @@ final class AppDatabase {
 
     private func runMigrations() throws {
         var migrator = DatabaseMigrator()
+        #if DEBUG
+        migrator.eraseDatabaseOnSchemaChange = true
+        #endif
 
         migrator.registerMigration("v1_create_transactions") { db in
             try db.create(table: "transactions") { t in
