@@ -1,5 +1,5 @@
 enum PortfolioCalculator {
-    static func calculate(transactions: [Transaction]) -> [Position] {
+    nonisolated static func calculate(transactions: [Transaction]) -> [Position] {
         var state: [String: PositionState] = [:]
 
         let sorted = transactions.sorted {
@@ -25,7 +25,7 @@ enum PortfolioCalculator {
                 pos.realizedGain += gain
 
             default:
-                break
+                assertionFailure("Unknown operation '\(tx.operation)' in transaction \(tx.id)")
             }
 
             state[tx.ticker] = pos

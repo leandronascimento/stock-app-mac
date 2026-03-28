@@ -112,4 +112,28 @@ final class PortfolioCalculatorTests: XCTestCase {
         let positions = PortfolioCalculator.calculate(transactions: txs)
         XCTAssertEqual(positions[0].averagePrice, 35.0, accuracy: 0.001)
     }
+
+    func test_sell_withBrokerageCost_reducesRealizedGain() {
+        // buy 100 @ 30, sell 50 @ 40 with fee 5
+        // gain = (40 - 30) * 50 - 5 = 495
+        let txs = [
+            makeTx(date: "2024-01-10", operation: "BUY",  quantity: 100, unitPrice: 30.0),
+            makeTx(date: "2024-03-01", operation: "SELL", quantity: 50,  unitPrice: 40.0, totalCost: 5.0),
+        ]
+        let positions = PortfolioCalculator.calculate(transactions: txs)
+        XCTAssertEqual(positions[0].realizedGain, 495.0, accuracy: 0.001)
+    }
+
+    func test_sameDateTransactions_secondarySortByCreatedAt() {
+        // tx1 (09:00): buy 100 @ 10, fee 10 → avgPrice = 1010/100 = 10.10
+        // tx2 (11:00): buy 100 @ 40, fee  0 → avgPrice = (100*10.10 + 100*40) / 200 = 25.05
+        var tx1 = makeTx(date: "2024-01-10", quantity: 100, unitPrice: 10.0, totalCost: 10.0)
+        var tx2 = makeTx(date: "2024-01-10", quantity: 100, unitPrice: 40.0)
+        tx1.createdAt = "2024-01-10T09:00:00Z"
+        tx2.createdAt = "2024-01-10T11:00:00Z"
+        let txs = [tx2, tx1] // intentionally reversed
+        let positions = PortfolioCalculator.calculate(transactions: txs)
+        XCTAssertEqual(positions[0].quantity, 200)
+        XCTAssertEqual(positions[0].averagePrice, 25.05, accuracy: 0.001)
+    }
 }
