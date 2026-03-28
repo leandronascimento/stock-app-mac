@@ -6,8 +6,23 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9C3BC2522F7814AA00DF9995 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 9C3BC2512F7814AA00DF9995 /* GRDB */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9C3BC2672F7816FE00DF9995 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C3BC23A2F7813E800DF9995 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C3BC2412F7813E800DF9995;
+			remoteInfo = StockApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		9C3BC2422F7813E800DF9995 /* StockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C3BC2632F7816FE00DF9995 /* StockAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StockAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +31,23 @@
 			path = StockApp;
 			sourceTree = "<group>";
 		};
+		9C3BC2642F7816FE00DF9995 /* StockAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = StockAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9C3BC23F2F7813E800DF9995 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C3BC2522F7814AA00DF9995 /* GRDB in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C3BC2602F7816FE00DF9995 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				9C3BC2442F7813E800DF9995 /* StockApp */,
+				9C3BC2642F7816FE00DF9995 /* StockAppTests */,
 				9C3BC2432F7813E800DF9995 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				9C3BC2422F7813E800DF9995 /* StockApp.app */,
+				9C3BC2632F7816FE00DF9995 /* StockAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -65,10 +95,34 @@
 			);
 			name = StockApp;
 			packageProductDependencies = (
+				9C3BC2512F7814AA00DF9995 /* GRDB */,
 			);
 			productName = StockApp;
 			productReference = 9C3BC2422F7813E800DF9995 /* StockApp.app */;
 			productType = "com.apple.product-type.application";
+		};
+		9C3BC2622F7816FE00DF9995 /* StockAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C3BC2692F7816FE00DF9995 /* Build configuration list for PBXNativeTarget "StockAppTests" */;
+			buildPhases = (
+				9C3BC25F2F7816FE00DF9995 /* Sources */,
+				9C3BC2602F7816FE00DF9995 /* Frameworks */,
+				9C3BC2612F7816FE00DF9995 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C3BC2682F7816FE00DF9995 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				9C3BC2642F7816FE00DF9995 /* StockAppTests */,
+			);
+			name = StockAppTests;
+			packageProductDependencies = (
+			);
+			productName = StockAppTests;
+			productReference = 9C3BC2632F7816FE00DF9995 /* StockAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -83,6 +137,10 @@
 					9C3BC2412F7813E800DF9995 = {
 						CreatedOnToolsVersion = 26.2;
 					};
+					9C3BC2622F7816FE00DF9995 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 9C3BC2412F7813E800DF9995;
+					};
 				};
 			};
 			buildConfigurationList = 9C3BC23D2F7813E800DF9995 /* Build configuration list for PBXProject "StockApp" */;
@@ -94,18 +152,29 @@
 			);
 			mainGroup = 9C3BC2392F7813E800DF9995;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				9C3BC2502F7814AA00DF9995 /* XCRemoteSwiftPackageReference "GRDB" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9C3BC2432F7813E800DF9995 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				9C3BC2412F7813E800DF9995 /* StockApp */,
+				9C3BC2622F7816FE00DF9995 /* StockAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9C3BC2402F7813E800DF9995 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C3BC2612F7816FE00DF9995 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +191,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9C3BC25F2F7816FE00DF9995 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9C3BC2682F7816FE00DF9995 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C3BC2412F7813E800DF9995 /* StockApp */;
+			targetProxy = 9C3BC2672F7816FE00DF9995 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9C3BC24B2F7813E900DF9995 /* Debug */ = {
@@ -329,6 +413,50 @@
 			};
 			name = Release;
 		};
+		9C3BC26A2F7816FE00DF9995 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SLWFD26889;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.leandronascimento.StockAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StockApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StockApp";
+			};
+			name = Debug;
+		};
+		9C3BC26B2F7816FE00DF9995 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SLWFD26889;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.leandronascimento.StockAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StockApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StockApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -350,7 +478,35 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		9C3BC2692F7816FE00DF9995 /* Build configuration list for PBXNativeTarget "StockAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C3BC26A2F7816FE00DF9995 /* Debug */,
+				9C3BC26B2F7816FE00DF9995 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9C3BC2502F7814AA00DF9995 /* XCRemoteSwiftPackageReference "GRDB" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDB.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9C3BC2512F7814AA00DF9995 /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C3BC2502F7814AA00DF9995 /* XCRemoteSwiftPackageReference "GRDB" */;
+			productName = GRDB;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9C3BC23A2F7813E800DF9995 /* Project object */;
 }
