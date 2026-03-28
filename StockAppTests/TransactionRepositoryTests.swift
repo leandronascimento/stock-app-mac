@@ -43,6 +43,7 @@ final class TransactionRepositoryTests: XCTestCase {
     }
 
     func test_fetchAll_sortedByDateThenCreatedAt() throws {
+        // Primary sort: date ASC
         let tx1 = makeTx(date: "2024-03-01")
         let tx2 = makeTx(date: "2024-01-10")
         try repo.insert(tx1)
@@ -50,6 +51,24 @@ final class TransactionRepositoryTests: XCTestCase {
         let all = try repo.fetchAll()
         XCTAssertEqual(all[0].date, "2024-01-10")
         XCTAssertEqual(all[1].date, "2024-03-01")
+    }
+
+    func test_fetchAll_sortedByCreatedAt_whenSameDate() throws {
+        // Secondary sort: createdAt ASC when date is equal
+        var tx1 = makeTx(date: "2024-01-10")
+        var tx2 = makeTx(date: "2024-01-10")
+        tx1.createdAt = "2024-01-10T09:00:00Z"
+        tx2.createdAt = "2024-01-10T11:00:00Z"
+        try repo.insert(tx1)
+        try repo.insert(tx2)
+        let all = try repo.fetchAll()
+        XCTAssertEqual(all[0].id, tx1.id)
+        XCTAssertEqual(all[1].id, tx2.id)
+    }
+
+    func test_delete_nonExistentId_returnsFalse() throws {
+        let deleted = try repo.delete(id: "nonexistent-id")
+        XCTAssertFalse(deleted)
     }
 
     func test_fetchAll_upToDate_excludesLater() throws {

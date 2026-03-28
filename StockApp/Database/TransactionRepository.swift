@@ -36,7 +36,8 @@ final class TransactionRepository {
         }
     }
 
-    func delete(id: String) throws {
+    @discardableResult
+    func delete(id: String) throws -> Bool {
         try db.write { db in
             try Transaction.deleteOne(db, key: id)
         }
