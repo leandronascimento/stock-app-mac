@@ -1,17 +1,13 @@
-//
-//  StockAppApp.swift
-//  StockApp
-//
-//  Created by Leandro Nascimento on 28/03/26.
-//
-
 import SwiftUI
 
 @main
 struct StockAppApp: App {
+    @StateObject private var appState = AppState(database: AppDatabase.shared)
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(appState)
         }
     }
 }

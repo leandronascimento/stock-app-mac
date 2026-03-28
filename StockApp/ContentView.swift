@@ -1,24 +1,10 @@
-//
-//  ContentView.swift
-//  StockApp
-//
-//  Created by Leandro Nascimento on 28/03/26.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+    @EnvironmentObject var appState: AppState
 
-#Preview {
-    ContentView()
+    var body: some View {
+        Text("Stock App — Phase 2 coming soon")
+            .padding()
+    }
 }
