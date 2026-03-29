@@ -103,7 +103,9 @@ struct AddTransactionView: View {
             Form {
                 Section("Ativo") {
                     TextField("Ticker (ex: PETR4)", text: $ticker)
+                        #if os(iOS)
                         .textInputAutocapitalization(.characters)
+                        #endif
                         .autocorrectionDisabled()
 
                     Picker("Operação", selection: $operation) {
@@ -117,11 +119,17 @@ struct AddTransactionView: View {
 
                 Section("Valores") {
                     TextField("Quantidade", text: $quantityText)
+                        #if os(iOS)
                         .keyboardType(.decimalPad)
+                        #endif
                     TextField("Preço unitário (R$)", text: $unitPriceText)
+                        #if os(iOS)
                         .keyboardType(.decimalPad)
+                        #endif
                     TextField("Custo/corretagem (R$)", text: $totalCostText)
+                        #if os(iOS)
                         .keyboardType(.decimalPad)
+                        #endif
                 }
 
                 Section("Detalhes (opcional)") {
@@ -138,7 +146,9 @@ struct AddTransactionView: View {
                 }
             }
             .navigationTitle(existingTransaction != nil ? "Editar Operação" : "Nova Operação")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancelar") { dismiss() }
