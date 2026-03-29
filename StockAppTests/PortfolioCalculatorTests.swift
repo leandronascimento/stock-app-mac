@@ -75,13 +75,15 @@ final class PortfolioCalculatorTests: XCTestCase {
         XCTAssertEqual(positions[0].realizedGain, 500.0, accuracy: 0.001)
     }
 
-    func test_fullSell_removesPositionFromResult() {
+    func test_fullSell_keepsPositionAsClosed() {
         let txs = [
             makeTx(date: "2024-01-10", operation: "BUY",  quantity: 100, unitPrice: 30.0),
             makeTx(date: "2024-03-01", operation: "SELL", quantity: 100, unitPrice: 40.0),
         ]
         let positions = PortfolioCalculator.calculate(transactions: txs)
-        XCTAssertEqual(positions.count, 0)
+        XCTAssertEqual(positions.count, 1)
+        XCTAssertEqual(positions[0].quantity, 0, accuracy: 0.001)
+        XCTAssertEqual(positions[0].realizedGain, 1000.0, accuracy: 0.001)
     }
 
     func test_multipleTickers_calculatedIndependently() {

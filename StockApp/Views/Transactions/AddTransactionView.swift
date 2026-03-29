@@ -101,50 +101,71 @@ struct AddTransactionView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Ativo") {
+                Section {
                     TextField("Ticker (ex: PETR4)", text: $ticker)
                         #if os(iOS)
                         .textInputAutocapitalization(.characters)
                         #endif
                         .autocorrectionDisabled()
+                        .font(.system(size: 15))
 
                     Picker("Operação", selection: $operation) {
-                        Text("Compra (C)").tag("BUY")
-                        Text("Venda (V)").tag("SELL")
+                        Text("Compra").tag("BUY")
+                        Text("Venda").tag("SELL")
                     }
                     .pickerStyle(.segmented)
 
                     DatePicker("Data", selection: $date, displayedComponents: .date)
+                        .font(.system(size: 15))
+                } header: {
+                    Text("Ativo")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(DesignSystem.Colors.secondaryText)
                 }
 
-                Section("Valores") {
+                Section {
                     TextField("Quantidade", text: $quantityText)
                         #if os(iOS)
                         .keyboardType(.decimalPad)
                         #endif
-                    TextField("Preço unitário (R$)", text: $unitPriceText)
+                        .font(.system(size: 15))
+                    TextField("Preço unitário", text: $unitPriceText)
                         #if os(iOS)
                         .keyboardType(.decimalPad)
                         #endif
-                    TextField("Custo/corretagem (R$)", text: $totalCostText)
+                        .font(.system(size: 15))
+                    TextField("Corretagem / Taxas", text: $totalCostText)
                         #if os(iOS)
                         .keyboardType(.decimalPad)
                         #endif
+                        .font(.system(size: 15))
+                } header: {
+                    Text("Valores (BRL)")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(DesignSystem.Colors.secondaryText)
                 }
 
-                Section("Detalhes (opcional)") {
+                Section {
                     TextField("Corretora", text: $broker)
+                        .font(.system(size: 15))
                     TextField("Observação", text: $notes)
+                        .font(.system(size: 15))
+                } header: {
+                    Text("Detalhes Opcionais")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(DesignSystem.Colors.secondaryText)
                 }
 
                 if let error = errorMessage {
                     Section {
                         Text(error)
-                            .foregroundStyle(.red)
-                            .font(.caption)
+                            .font(.system(size: 12))
+                            .foregroundColor(DesignSystem.Colors.negative)
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(DesignSystem.Colors.background)
             .navigationTitle(existingTransaction != nil ? "Editar Operação" : "Nova Operação")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)

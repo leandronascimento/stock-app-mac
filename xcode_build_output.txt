@@ -1,0 +1,67 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild build -project "/Users/leandro/Developer/Leandro Tech/Stock App/StockApp/StockApp.xcodeproj" -scheme StockApp -destination platform=macOS
+
+Resolve Package Graph
+
+
+Resolved source packages:
+  GRDB: https://github.com/groue/GRDB.swift @ 6.29.3
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (5 targets)
+    Target 'StockApp' in project 'StockApp'
+        ➜ Explicit dependency on target 'GRDB' in project 'GRDB'
+    Target 'GRDB' in project 'GRDB'
+        ➜ Explicit dependency on target 'GRDB' in project 'GRDB'
+        ➜ Explicit dependency on target 'GRDB_GRDB' in project 'GRDB'
+    Target 'GRDB' in project 'GRDB'
+        ➜ Explicit dependency on target 'GRDB_GRDB' in project 'GRDB'
+        ➜ Explicit dependency on target 'CSQLite' in project 'GRDB'
+    Target 'CSQLite' in project 'GRDB' (no dependencies)
+    Target 'GRDB_GRDB' in project 'GRDB' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+ReadFileContents /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/docc/features.json
+
+Build description signature: f07d7f7d2439d2ef807692c9105d910e
+Build description path: /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Intermediates.noindex/XCBuildData/f07d7f7d2439d2ef807692c9105d910e.xcbuilddata
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk /Users/leandro/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/macosx26.2-25C57-00fa09913b459cbbc988d1f6730289ae.sdkstatcache
+    cd /Users/leandro/Developer/Leandro\ Tech/Stock\ App/StockApp/StockApp.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -o /Users/leandro/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/macosx26.2-25C57-00fa09913b459cbbc988d1f6730289ae.sdkstatcache
+
+ProcessInfoPlistFile /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Products/Debug/GRDB_GRDB.bundle/Contents/Info.plist /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Intermediates.noindex/GRDB.build/Debug/GRDB_GRDB.build/empty-GRDB_GRDB.plist (in target 'GRDB_GRDB' from project 'GRDB')
+    cd /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/SourcePackages/checkouts/GRDB.swift
+    builtin-infoPlistUtility /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Intermediates.noindex/GRDB.build/Debug/GRDB_GRDB.build/empty-GRDB_GRDB.plist -producttype com.apple.product-type.bundle -expandbuildsettings -platform macosx -o /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Products/Debug/GRDB_GRDB.bundle/Contents/Info.plist
+
+ProcessInfoPlistFile /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Products/Debug/StockApp.app/Contents/Info.plist /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Intermediates.noindex/StockApp.build/Debug/StockApp.build/empty-StockApp.plist (in target 'StockApp' from project 'StockApp')
+    cd /Users/leandro/Developer/Leandro\ Tech/Stock\ App/StockApp
+    builtin-infoPlistUtility /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Intermediates.noindex/StockApp.build/Debug/StockApp.build/empty-StockApp.plist -producttype com.apple.product-type.application -genpkginfo /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Products/Debug/StockApp.app/Contents/PkgInfo -expandbuildsettings -platform macosx -additionalcontentfile /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Intermediates.noindex/StockApp.build/Debug/StockApp.build/assetcatalog_generated_info.plist -scanforprivacyfile /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Products/Debug/StockApp.app/Contents/Resources/GRDB_GRDB.bundle -o /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Products/Debug/StockApp.app/Contents/Info.plist
+
+CopySwiftLibs /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Products/Debug/StockApp.app (in target 'StockApp' from project 'StockApp')
+    cd /Users/leandro/Developer/Leandro\ Tech/Stock\ App/StockApp
+    builtin-swiftStdLibTool --copy --verbose --sign 490D096A205AD09B18E56584C4273854FC8512E0 --scan-executable /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Products/Debug/StockApp.app/Contents/MacOS/StockApp.debug.dylib --scan-folder /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Products/Debug/StockApp.app/Contents/Frameworks --scan-folder /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Products/Debug/StockApp.app/Contents/PlugIns --scan-folder /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Products/Debug/StockApp.app/Contents/Library/SystemExtensions --scan-folder /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Products/Debug/StockApp.app/Contents/Extensions --platform macosx --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Products/Debug/StockApp.app/Contents/Frameworks --strip-bitcode --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /Users/leandro/Library/Developer/Xcode/DerivedData/StockApp-gvybguqogxbfaxebcknhjzivzyzu/Build/Intermediates.noindex/StockApp.build/Debug/StockApp.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+
+** BUILD SUCCEEDED **
+

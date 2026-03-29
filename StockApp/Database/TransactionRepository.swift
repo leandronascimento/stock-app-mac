@@ -9,9 +9,7 @@ final class TransactionRepository {
 
     func fetchAll() throws -> [Transaction] {
         try db.read { db in
-            try Transaction
-                .order(Column("date"), Column("createdAt"))
-                .fetchAll(db)
+            try Transaction.order(Column("date").asc, Column("createdAt").asc).fetchAll(db)
         }
     }
 
@@ -40,6 +38,12 @@ final class TransactionRepository {
     func delete(id: String) throws -> Bool {
         try db.write { db in
             try Transaction.deleteOne(db, key: id)
+        }
+    }
+
+    func deleteAll() throws {
+        try db.write { db in
+            try db.execute(sql: "DELETE FROM transactions")
         }
     }
 }

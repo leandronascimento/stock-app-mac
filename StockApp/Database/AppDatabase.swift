@@ -55,6 +55,16 @@ final class AppDatabase {
                           on: "transactions", columns: ["date"])
         }
 
+        migrator.registerMigration("v2_create_ticker_metadata") { db in
+            try db.create(table: "ticker_metadata") { t in
+                t.column("ticker", .text).primaryKey()
+                t.column("cnpj", .text)
+                t.column("name", .text)
+            }
+            try db.create(index: "idx_ticker_metadata_cnpj",
+                          on: "ticker_metadata", columns: ["cnpj"])
+        }
+
         try migrator.migrate(dbQueue)
     }
 }

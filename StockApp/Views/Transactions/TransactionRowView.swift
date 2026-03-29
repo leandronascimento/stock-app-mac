@@ -12,32 +12,46 @@ struct TransactionRowView: View {
     }
 
     var body: some View {
-        HStack(spacing: 12) {
-            Text(operationLabel)
-                .font(.headline)
-                .foregroundStyle(.white)
-                .frame(width: 28, height: 28)
-                .background(operationColor)
-                .clipShape(Circle())
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(transaction.ticker)
-                    .font(.headline)
-                Text(BRLFormatter.date(transaction.date))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-
-            Spacer()
-
-            VStack(alignment: .trailing, spacing: 2) {
-                Text(BRLFormatter.currency(transaction.quantity * transaction.unitPrice))
-                    .font(.subheadline)
-                Text("\(BRLFormatter.quantity(transaction.quantity)) × R$ \(BRLFormatter.decimal(transaction.unitPrice))")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+        DesignSystem.RowCard {
+            HStack(alignment: .center, spacing: 16) {
+                // 1. Operation and Ticker
+                HStack(spacing: 12) {
+                    DesignSystem.TickerBadge(ticker: transaction.ticker)
+                    
+                    VStack(alignment: .leading, spacing: 1) {
+                        HStack(spacing: 6) {
+                            Text(transaction.operation == "BUY" ? "Compra" : "Venda")
+                                .font(.system(size: 9, weight: .black))
+                                .padding(.horizontal, 4)
+                                .padding(.vertical, 1)
+                                .background(transaction.operation == "BUY" ? DesignSystem.Colors.positive.opacity(0.12) : Color.orange.opacity(0.12))
+                                .foregroundColor(transaction.operation == "BUY" ? DesignSystem.Colors.positive : Color.orange)
+                                .cornerRadius(2)
+                            
+                            Text(transaction.ticker)
+                                .font(.system(size: 13, weight: .bold))
+                        }
+                        
+                        Text(BRLFormatter.date(transaction.date))
+                            .font(.system(size: 10))
+                            .foregroundColor(DesignSystem.Colors.secondaryText)
+                    }
+                }
+                .frame(width: 140, alignment: .leading)
+                
+                Spacer()
+                
+                // 2. Value and Details
+                VStack(alignment: .trailing, spacing: 1) {
+                    Text(BRLFormatter.currency(transaction.quantity * transaction.unitPrice))
+                        .font(.system(size: 13, weight: .bold))
+                        .foregroundColor(DesignSystem.Colors.primaryText)
+                    
+                    Text("\(BRLFormatter.quantity(transaction.quantity)) × \(BRLFormatter.decimal(transaction.unitPrice))")
+                        .font(.system(size: 10))
+                        .foregroundColor(DesignSystem.Colors.secondaryText)
+                }
             }
         }
-        .padding(.vertical, 2)
     }
 }

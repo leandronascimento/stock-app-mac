@@ -73,9 +73,51 @@ final class AppStateTests: XCTestCase {
         XCTAssertEqual(state.transactions[0].notes, "updated")
     }
 
-    func test_fullSell_removesPosition() throws {
+    func test_fullSell_keepsPositionAsClosed() throws {
         try state.add(makeTx(operation: "BUY",  quantity: 100, unitPrice: 30.0))
         try state.add(makeTx(date: "2024-03-01", operation: "SELL", quantity: 100, unitPrice: 40.0))
-        XCTAssertEqual(state.positions.count, 0)
+        XCTAssertEqual(state.positions.count, 1)
+        XCTAssertEqual(state.positions[0].quantity, 0, accuracy: 1e-6)
+    }
+
+    // MARK: - importTransactions
+
+    func test_importTransactions_insertsAllRows() throws {
+        let rows = [
+            ParsedRow(ticker: "PETR4", date: "2024-01-10", operation: "BUY",
+                      quantity: 100, unitPrice: 30.0, totalCost: 0,
+                      broker: "XP", category: "Ações", notes: nil),
+            ParsedRow(ticker: "VALE3", date: "2024-02-01", operation: "BUY",
+                      quantity: 50, unitPrice: 60.0, totalCost: 5,
+                      broker: "XP", category: "Ações", notes: nil)
+        ]
+        try state.importTransactions(rows)
+        XCTAssertEqual(state.transactions.count, 2)
+        XCTAssertEqual(state.positions.count, 2)
+    }
+
+    func test_importTransactions_refreshesPositions() throws {
+        let rows = [
+            ParsedRow(ticker: "PETR4", date: "2024-01-10", operation: "BUY",
+                      quantity: 100, unitPrice: 30.0, totalCost: 0,
+                      broker: nil, category: nil, notes: nil)
+        ]
+        try state.importTransactions(rows)
+        XCTAssertEqual(state.positions[0].averagePrice, 30.0, accuracy: 0.001)
+    }
+
+    func test_previewImport_returnsDuplicateFlag() throws {
+        // Pre-insert a matching transaction
+        try state.add(makeTx(ticker: "PETR4", date: "2024-01-10", operation: "BUY",
+                             quantity: 100, unitPrice: 30.0))
+        // Build CSV with the same row
+        let csvString = """
+        código Ativo,data operação,categoria,operação c/v,quantidade,preço unitário,custo,moeda,corretora,observação
+        PETR4,10/jan./24,Ações,C,100,"30,00",0,BRL,XP,
+        """
+        let data = Data(csvString.utf8)
+        let preview = try state.previewImport(data: data)
+        XCTAssertEqual(preview.valid.count, 1)
+        XCTAssertEqual(preview.duplicates.count, 1)
     }
 }

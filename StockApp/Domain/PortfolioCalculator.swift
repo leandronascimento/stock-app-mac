@@ -29,18 +29,20 @@ enum PortfolioCalculator {
             }
 
             state[tx.ticker] = pos
+            if abs(state[tx.ticker]?.quantity ?? 0) < 1e-6 {
+                state[tx.ticker]?.quantity = 0
+            }
         }
 
-        return state.compactMap { ticker, pos in
-            guard pos.quantity > 0 else { return nil }
-            return Position(
+        return state.map { ticker, pos in
+            Position(
                 ticker: ticker,
                 quantity: pos.quantity,
                 averagePrice: pos.averagePrice,
                 totalInvested: pos.quantity * pos.averagePrice,
                 realizedGain: pos.realizedGain
             )
-        }
+        }.sorted { $0.ticker < $1.ticker }
     }
 
     private struct PositionState {

@@ -35,9 +35,8 @@ enum CSVImporter {
             throw ParseError.missingHeaders([])
         }
 
-        let rawHeaders = headerLine
-            .components(separatedBy: "|")
-            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
+        let rawHeaders = splitCSVLine(headerLine)
+            .map { $0.lowercased() }
 
         let colIndex = Dictionary(
             rawHeaders.enumerated().map { ($1, $0) },
@@ -54,9 +53,7 @@ enum CSVImporter {
 
         for (offset, line) in lines.dropFirst().enumerated() {
             let rowNumber = offset + 2 // 1-based; header = row 1
-            let cols = line
-                .components(separatedBy: "|")
-                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            let cols = splitCSVLine(line)
 
             func col(_ name: String) -> String? {
                 guard let idx = colIndex[name], idx < cols.count else { return nil }
@@ -106,12 +103,12 @@ enum CSVImporter {
 
             let totalCost: Double
             if let rawCost = col("custo"), let cost = parseNumber(rawCost) {
-                guard cost >= 0 else {
-                    errors.append(ImportError(rowNumber: rowNumber, rawContent: line,
-                        reason: "Custo negativo: \(rawCost)"))
-                    continue
-                }
-                totalCost = cost
+                // Column "custo" in the user's CSV is the total gross value (quantity * price + fees).
+                // We extract the fees by subtracting the calculated gross value.
+                let grossValue = quantity * unitPrice
+                let diff = cost - grossValue
+                // Only treat as fees if it's a positive difference > 0.001 (ignoring rounding noise)
+                totalCost = diff > 0.001 ? diff : 0
             } else {
                 totalCost = 0
             }
@@ -142,7 +139,27 @@ enum CSVImporter {
         return ImportPreview(valid: valid, errors: errors, duplicates: duplicates)
     }
 
-    // MARK: - Helpers (internal so tests can call directly)
+    // MARK: - Helpers
+
+    /// Robust CSV split that handles quotes and commas
+    private static func splitCSVLine(_ line: String) -> [String] {
+        var result: [String] = []
+        var current = ""
+        var inQuotes = false
+        
+        for char in line {
+            if char == "\"" {
+                inQuotes.toggle()
+            } else if char == "," && !inQuotes {
+                result.append(current.trimmingCharacters(in: .whitespaces))
+                current = ""
+            } else {
+                current.append(char)
+            }
+        }
+        result.append(current.trimmingCharacters(in: .whitespaces))
+        return result
+    }
 
     static func parseDate(_ raw: String) -> String? {
         let parts = raw.lowercased().components(separatedBy: "/")
@@ -163,11 +180,10 @@ enum CSVImporter {
     }
 
     static func mapOperation(_ raw: String) -> String? {
-        switch raw.trimmingCharacters(in: .whitespaces).uppercased() {
-        case "C": return "BUY"
-        case "V": return "SELL"
-        default:  return nil
-        }
+        let clean = raw.trimmingCharacters(in: .whitespaces).uppercased()
+        if clean.contains("C") { return "BUY" }
+        if clean.contains("V") { return "SELL" }
+        return nil
     }
 
     // MARK: - Private

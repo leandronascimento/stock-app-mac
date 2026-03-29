@@ -9,6 +9,18 @@ struct ContentView: View {
                 .tabItem {
                     Label("Carteira", systemImage: "chart.pie.fill")
                 }
+            ClosedPositionsView()
+                .tabItem {
+                    Label("Encerrados", systemImage: "archivebox.fill")
+                }
+            TaxReportView()
+                .tabItem {
+                    Label("IR Mensal", systemImage: "doc.text.fill")
+                }
+            AnnualReportView()
+                .tabItem {
+                    Label("Bens e Direitos", systemImage: "folder.fill")
+                }
             TransactionListView()
                 .tabItem {
                     Label("Operações", systemImage: "list.bullet")
@@ -17,5 +29,6 @@ struct ContentView: View {
         .task {
             appState.loadAll()
         }
+        .preferredColorScheme(.light)
     }
 }
