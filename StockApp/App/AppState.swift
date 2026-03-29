@@ -16,6 +16,7 @@ final class AppState: ObservableObject {
         do {
             transactions = try repo.fetchAll()
             positions = PortfolioCalculator.calculate(transactions: transactions)
+            errorMessage = nil
         } catch {
             errorMessage = error.localizedDescription
         }
